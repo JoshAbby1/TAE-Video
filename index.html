@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TAE Video Creator</title>
+<meta name="color-scheme" content="light" />
+<meta name="theme-color" content="#A8B48F" />
+
+<style>
+:root{
+  --bg:#A8B48F;
+  --panel:#B7C19C;
+  --text:#3B2E2A;
+  --muted:#5A4A44;
+  --btn:#3B2E2A;
+  --btnText:#F3EFED;
+}
+
+html,body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,Arial,sans-serif;
+  margin:0;
+  padding:0;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  min-height:100%;
+  overflow-x:hidden;
+}
+
+.wrap{
+  width:100%;
+  max-width:420px;
+  padding:24px;
+  box-sizing:border-box;
+}
+
+h1{
+  margin:0 0 12px;
+  text-align:center;
+}
+
+.intro{
+  color:var(--muted);
+  font-size:14px;
+  margin:6px 0 16px;
+  text-align:center;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid rgba(59,46,42,.25);
+  border-radius:14px;
+  padding:14px;
+  margin:12px 0;
+}
+
+button{
+  width:100%;
+  background:var(--btn);
+  color:var(--btnText);
+  border:0;
+  border-radius:12px;
+  padding:14px;
+  font-weight:700;
+  font-size:16px;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+button[disabled]{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.muted{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:6px;
+}
+
+@media (orientation:landscape){
+  body{align-items:center}
+}
+</style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>🎬 TAE Video Creator</h1>
+    <p class="intro">Upload your reference video → paste your prompt → set generation details → click “Create video.”</p>
+
+    <div class="card">
+      <h2>🎥 Upload your reference</h2>
+      <p class="muted">Click below to upload your short clip or drag it in (MP4, MOV, WEBM supported)</p>
+      <button id="uploadBtn">Click to upload</button>
+      <input type="file" id="fileInput" accept="video/*" style="display:none" />
+      <p id="fileName" class="muted"></p>
+    </div>
+
+    <div class="card">
+      <h2>✏️ Paste your video prompt</h2>
+      <textarea id="promptBox" placeholder="e.g., cinematic streetlight glow, slow motion walk, Y2K tone, 16:9 video aesthetic" style="width:100%;border-radius:10px;border:1px solid rgba(59,46,42,.25);padding:10px;min-height:80px;"></textarea>
+      <button id="createBtn">Create video (opens Gemini)</button>
+    </div>
+
+    <p class="muted" style="text-align:center;margin-top:20px;">Built with ❤️ by TAE</p>
+  </div>
+
+<script>
+const VIDEO_LINK = "YOUR_GEMINI_VIDEO_LINK_HERE";
+const uploadBtn = document.getElementById("uploadBtn");
+const fileInput = document.getElementById("fileInput");
+const fileName = document.getElementById("fileName");
+const createBtn = document.getElementById("createBtn");
+
+uploadBtn.addEventListener("click",()=>fileInput.click());
+fileInput.addEventListener("change",()=>{
+  const f = fileInput.files[0];
+  fileName.textContent = f ? "Uploaded: " + f.name : "";
+});
+
+createBtn.addEventListener("click",()=>{
+  window.location.href = VIDEO_LINK;
+});
+</script>
+</body>
+</html>
